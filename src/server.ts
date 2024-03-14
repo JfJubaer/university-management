@@ -4,8 +4,6 @@ import config from './config'
 
 main().catch(err => console.log(err))
 
-const port = 5000
-
 async function main() {
   try {
     await mongoose.connect(config.database_url as string)
