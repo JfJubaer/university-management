@@ -1,17 +1,18 @@
-import { Request, Response } from 'express'
-import studentService from './user.services'
+import { NextFunction, Request, Response } from 'express'
+import usersService from './user.services'
 
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // const { user } = req.body
-    const result = studentService.createStudent({
-      role: 'student',
-      id: '2',
-      password: 'string',
+    const { user } = req.body
+    // console.log('api hitted')
+    const result = await usersService.createUser(user)
+    res.status(200).json({
+      success: true,
+      message: 'user created successfully!',
+      data: result,
     })
-    res.send(result)
-  } catch (error) {
-    res.status(400)
+  } catch (err) {
+    next(err)
   }
 }
 
