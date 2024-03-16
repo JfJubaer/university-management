@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\Zubier\\Desktop\\Dev 2.0\\mission-3\\module-11\\logs\\winston\\errors\\.e8b02ab608ecc093af97da4e8055dad7aa23312f-audit.json",
+    "files": [
+        {
+            "date": 1710585073041,
+            "name": "C:\\Users\\Zubier\\Desktop\\Dev 2.0\\mission-3\\module-11\\logs\\winston\\errors\\phu-2024-16-03-16-error.log",
+            "hash": "9e847c54c138ce7557e1b1ed6327daee9106bebc6770deec079ed83cff90a0fd"
+        },
+        {
+            "date": 1710586886782,
+            "name": "C:\\Users\\Zubier\\Desktop\\Dev 2.0\\mission-3\\module-11\\logs\\winston\\errors\\phu-2024-16-03-17-error.log",
+            "hash": "0acd8d03a3ff6040d2ed90265a96d3514d4a58fe5a37bd6198a5e76c73b9937e"
+        },
+        {
+            "date": 1710590422219,
+            "name": "C:\\Users\\Zubier\\Desktop\\Dev 2.0\\mission-3\\module-11\\logs\\winston\\errors\\phu-2024-16-03-18-error.log",
+            "hash": "174eee0d2c82a8bf7f5fdcb49e7b3829bff829b855e6226fb3d3517fee3549bf"
+        },
+        {
+            "date": 1710599824516,
+            "name": "C:\\Users\\Zubier\\Desktop\\Dev 2.0\\mission-3\\module-11\\logs\\winston\\errors\\phu-2024-16-03-20-error.log",
+            "hash": "44f9a6d02ed031a42413ef4ab8d73bf9d6818baf36464034f1c0f809fcf2cf0d"
+        }
+    ],
+    "hashType": "sha256"
+}

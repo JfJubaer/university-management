@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 
-import { Model, Schema, model } from 'mongoose'
-import { IUser } from './user.interface'
-
-type UserModel = Model<IUser, object>
+import { Schema, model } from 'mongoose'
+import { IUser, UserModel } from './user.interface'
 
 const UserSchema = new Schema<IUser, UserModel>(
   {
