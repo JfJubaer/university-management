@@ -2,9 +2,11 @@ import config from '../../../config/index';
 import ApiError from '../../../errors/ApiError';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import { generateUserId } from './user.utils';
 
-const createUser = async (user: IUser): Promise<IUser | null> => {
+const createUser = async (
+  user: IUser,
+  userData: any,
+): Promise<IUser | null> => {
   // auto generated incremental id
   const id = await generateUserId();
   user.id = id;
