@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-this-alias */
-
 import { Schema, model } from 'mongoose';
 import { IUser, UserModel } from './user.interface';
 
-const UserSchema = new Schema<IUser, UserModel>(
+const userSchema = new Schema<IUser>(
   {
     id: {
       type: String,
@@ -17,15 +15,25 @@ const UserSchema = new Schema<IUser, UserModel>(
     password: {
       type: String,
       required: true,
-      select: 0,
     },
+    student: {
+      type: Schema.Types.ObjectId,
+      ref: 'Student',
+    },
+    // faculty: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Faculty',
+    // },
+    // Admin: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Admin',
+    // },
   },
   {
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
-  },
+  }
 );
-
-export const User = model<IUser, UserModel>('User', UserSchema);
+export const User = model<IUser, UserModel>('User', userSchema);
