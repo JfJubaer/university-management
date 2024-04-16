@@ -6,7 +6,7 @@ import { IPaginationOptions } from '../../../interfaces/pagination';
 
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { studentSearchableFields } from './student.constants';
+import { studentSearchableFields } from './student.constant';
 import { IStudent, IStudentFilters } from './student.interface';
 import { Student } from './student.model';
 
