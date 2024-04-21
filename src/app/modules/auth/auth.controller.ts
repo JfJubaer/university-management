@@ -4,6 +4,10 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { ILoginUserResponse, IRefreshTokenResponse } from './auth.interface';
 import { AuthService } from './auth.service';
+import { jwtHelpers } from '../../../helpers/jwtHelpers';
+import ApiError from '../../../errors/ApiError';
+import httpStatus from 'http-status';
+import { Secret } from 'jsonwebtoken';
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
@@ -49,7 +53,28 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const changePassword = catchAsync(async (req: Request, res: Response) => {
+  const token = req.headers.authorization;
+  // verify token
+  if (!token) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
+  }
+  let verifiedUser = null;
+  verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+
+  const { ...passwordData } = req.body;
+
+  await AuthService.changePassword(verifiedUser, passwordData);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Password changed successfully !',
+  });
+});
+
 export const AuthController = {
+  changePassword,
   loginUser,
   refreshToken,
 };
