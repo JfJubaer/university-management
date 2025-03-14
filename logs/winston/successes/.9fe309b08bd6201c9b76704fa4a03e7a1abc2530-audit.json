@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\.9fe309b08bd6201c9b76704fa4a03e7a1abc2530-audit.json",
+    "files": [
+        {
+            "date": 1741122390900,
+            "name": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\phu-2025-05-03-03-success.log",
+            "hash": "e800056958408cecffc739346e737b1f5805fafeb5c29c86966eba74dcaa62a4"
+        },
+        {
+            "date": 1741941127594,
+            "name": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\phu-2025-14-03-14-success.log",
+            "hash": "2a02bd4c9cf84f0e45ebba1a2fa37d174441fa1e77c6538df1fe2103cdfca54d"
+        },
+        {
+            "date": 1741943385296,
+            "name": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\phu-2025-14-03-15-success.log",
+            "hash": "abf66e1b4816a7740f86ce4f26d089e316a7545884af1108347ff1245c0c0d0e"
+        }
+    ],
+    "hashType": "sha256"
+}
