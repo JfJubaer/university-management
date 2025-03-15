@@ -6,9 +6,9 @@
     "auditLog": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\.9fe309b08bd6201c9b76704fa4a03e7a1abc2530-audit.json",
     "files": [
         {
-            "date": 1742065207206,
-            "name": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\phu-2025-16-03-01-success.log",
-            "hash": "030e02a1c4a6c53ed5c965b8eaa7f94f8959433505f147192b930e6147a87e91"
+            "date": 1742081685795,
+            "name": "C:\\Users\\Zubs\\Desktop\\Dev2.0\\mission-3\\Auth Service\\logs\\winston\\successes\\phu-2025-16-03-05-success.log",
+            "hash": "be942f5e6d9f45c13cc52be86c3297d8d1b7309311050d9d91f2e6f4deb88480"
         }
     ],
     "hashType": "sha256"
