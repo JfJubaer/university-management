@@ -14,10 +14,10 @@ const createStudent: RequestHandler = catchAsync(
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'user created successfully!',
+      message: 'Student created successfully!',
       data: result,
     });
-  },
+  }
 );
 
 const createFaculy: RequestHandler = catchAsync(
@@ -28,10 +28,10 @@ const createFaculy: RequestHandler = catchAsync(
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'user created successfully!',
+      message: 'Faculty created successfully!',
       data: result,
     });
-  },
+  }
 );
 
 const createAdmin: RequestHandler = catchAsync(
@@ -45,7 +45,7 @@ const createAdmin: RequestHandler = catchAsync(
       message: 'Admin created successfully!',
       data: result,
     });
-  },
+  }
 );
 
 export const UserController = {

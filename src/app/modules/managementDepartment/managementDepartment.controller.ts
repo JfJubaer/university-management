@@ -5,13 +5,14 @@ import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
 import { managementDepartmentFilterableFields } from './managementDepartment.constant';
-import { IManagementDepartment } from './managementDepartment.interface';
+import { IManagementDepartment } from './managementDepartment.inerface';
 import { ManagementDepartmentService } from './managementDepartment.service';
 
 const createDepartment = catchAsync(async (req: Request, res: Response) => {
   const { ...departmentData } = req.body;
-  const result =
-    await ManagementDepartmentService.createDepartment(departmentData);
+  const result = await ManagementDepartmentService.createDepartment(
+    departmentData
+  );
 
   sendResponse<IManagementDepartment>(res, {
     statusCode: httpStatus.OK,
@@ -27,13 +28,13 @@ const getAllDepartments = catchAsync(async (req: Request, res: Response) => {
 
   const result = await ManagementDepartmentService.getAllDepartments(
     filters,
-    paginationOptions,
+    paginationOptions
   );
 
   sendResponse<IManagementDepartment[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Management departments retrieved successfully',
+    message: 'Management departments fetched successfully',
     meta: result.meta,
     data: result.data,
   });
@@ -46,7 +47,7 @@ const getSingleDepartment = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IManagementDepartment>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Management department retieved successfully',
+    message: 'Management department fetched successfully',
     data: result,
   });
 });
@@ -57,7 +58,7 @@ const updateDepartment = catchAsync(
     const updatedData = req.body;
     const result = await ManagementDepartmentService.updateDepartment(
       id,
-      updatedData,
+      updatedData
     );
 
     sendResponse<IManagementDepartment>(res, {
@@ -66,7 +67,7 @@ const updateDepartment = catchAsync(
       message: 'Management department updated successfully',
       data: result,
     });
-  }),
+  })
 );
 
 const deleteDepartment = catchAsync(async (req: Request, res: Response) => {

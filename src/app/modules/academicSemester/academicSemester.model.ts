@@ -1,12 +1,12 @@
+import httpStatus from 'http-status';
 import { Schema, model } from 'mongoose';
+import ApiError from '../../../errors/ApiError';
 import {
   academicSemesterCodes,
   academicSemesterTitles,
   acdemicSemesterMonths,
 } from './academicSemester.constant';
 import { IAcademicSemester } from './academicSemester.interface';
-import ApiError from '../../../errors/ApiError';
-import httpStatus from 'http-status';
 
 const academicSemesterSchema = new Schema<IAcademicSemester>(
   {
@@ -16,7 +16,7 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
       enum: academicSemesterTitles,
     },
     year: {
-      type: String,
+      type: Number,
       required: true,
     },
     code: {
@@ -34,13 +34,17 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
       required: true,
       enum: acdemicSemesterMonths,
     },
+    syncId: {
+      type: String,
+      required: true
+    }
   },
   {
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
-  },
+  }
 );
 
 academicSemesterSchema.pre('save', async function (next) {
@@ -48,10 +52,11 @@ academicSemesterSchema.pre('save', async function (next) {
     title: this.title,
     year: this.year,
   });
+  console.log(isExist)
   if (isExist) {
     throw new ApiError(
       httpStatus.CONFLICT,
-      'Academic semester is already exist !',
+      'Academic semester is already exist !'
     );
   }
   next();
@@ -59,15 +64,5 @@ academicSemesterSchema.pre('save', async function (next) {
 
 export const AcademicSemester = model<IAcademicSemester>(
   'AcademicSemester',
-  academicSemesterSchema,
+  academicSemesterSchema
 );
-
-//Handling Same Year and same semester issue
-
-// Data -> check -? Same year && same semester
-
-// 2025 Autumn
-// 2025 Autumn- X
-//2026 Autumn
-
-// Same Year && Same Semester -> Duplicate Entry

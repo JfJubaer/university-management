@@ -10,12 +10,13 @@ import {
 } from './academicSemester.constant';
 import {
   IAcademicSemester,
+  IAcademicSemesterCreatedEvent,
   IAcademicSemesterFilters,
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
 
 const createSemester = async (
-  payload: IAcademicSemester,
+  payload: IAcademicSemester
 ): Promise<IAcademicSemester> => {
   if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semester Code');
@@ -24,16 +25,24 @@ const createSemester = async (
   return result;
 };
 
+const getSingleSemester = async (
+  id: string
+): Promise<IAcademicSemester | null> => {
+  const result = await AcademicSemester.findById(id);
+  return result;
+};
+
 const getAllsemesters = async (
   filters: IAcademicSemesterFilters,
-  paginationOptions: IPaginationOptions,
+  paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademicSemester[]>> => {
+  // Extract searchTerm to implement search query
   const { searchTerm, ...filtersData } = filters;
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
 
   const andConditions = [];
-
+  // Search needs $or for searching in specified fields
   if (searchTerm) {
     andConditions.push({
       $or: academicSemesterSearchableFields.map(field => ({
@@ -53,33 +62,8 @@ const getAllsemesters = async (
     });
   }
 
-  // const andConditions = [
-  //   {
-  //     $or: [
-  //       {
-  //         title: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //       {
-  //         code: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //       {
-  //         year: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //     ],
-  //   },
-  // ];
-
+  // Dynamic  Sort needs  field to  do sorting
   const sortConditions: { [key: string]: SortOrder } = {};
-
   if (sortBy && sortOrder) {
     sortConditions[sortBy] = sortOrder;
   }
@@ -103,16 +87,9 @@ const getAllsemesters = async (
   };
 };
 
-const getSingleSemester = async (
-  id: string,
-): Promise<IAcademicSemester | null> => {
-  const result = await AcademicSemester.findById(id);
-  return result;
-};
-
 const updateSemester = async (
   id: string,
-  payload: Partial<IAcademicSemester>,
+  payload: Partial<IAcademicSemester>
 ): Promise<IAcademicSemester | null> => {
   if (
     payload.title &&
@@ -129,16 +106,55 @@ const updateSemester = async (
 };
 
 const deleteSemester = async (
-  id: string,
+  id: string
 ): Promise<IAcademicSemester | null> => {
   const result = await AcademicSemester.findByIdAndDelete(id);
   return result;
 };
 
+
+const createSemesterFromEvent = async (
+  e: IAcademicSemesterCreatedEvent
+): Promise<void> => {
+  console.log(e)
+  await AcademicSemester.create({
+    title: e.title,
+    year: e.year,
+    code: e.code,
+    startMonth: e.startMonth,
+    endMonth: e.endMonth,
+    syncId: e.id
+  });
+};
+
+const updateOneIntoDBFromEvent = async (
+  e: IAcademicSemesterCreatedEvent
+): Promise<void> => {
+  await AcademicSemester.findOneAndUpdate(
+    { syncId: e.id },
+    {
+      $set: {
+        title: e.title,
+        year: e.year,
+        code: e.code,
+        startMonth: e.startMonth,
+        endMonth: e.endMonth
+      }
+    }
+  )
+};
+
+const deleteOneFromDBFromEvent = async (syncId: string): Promise<void> => {
+  await AcademicSemester.findOneAndDelete({ syncId });
+};
+
 export const AcademicSemesterService = {
   createSemester,
-  getAllsemesters,
   getSingleSemester,
+  getAllsemesters,
   updateSemester,
   deleteSemester,
+  createSemesterFromEvent,
+  updateOneIntoDBFromEvent,
+  deleteOneFromDBFromEvent
 };

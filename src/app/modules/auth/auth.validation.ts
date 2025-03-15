@@ -18,6 +18,7 @@ const refreshTokenZodSchema = z.object({
     }),
   }),
 });
+
 const changePasswordZodSchema = z.object({
   body: z.object({
     oldPassword: z.string({
